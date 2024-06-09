@@ -18,6 +18,7 @@ def get_my_lasercircuit() :
     circuit.add_emitter(Emitter("A", 2, 2))
     circuit.add_emitter(Emitter("B", 8, 1))
     circuit.add_emitter(Emitter("C", 15, 6))
+    circuit.add_emitter(Receiver("R4", 15, 3))
     circuit.add_receiver(Receiver("R0", 2, 6))
     circuit.add_receiver(Receiver("R1", 15, 2))
     circuit.add_receiver(Receiver("R2", 6, 1))

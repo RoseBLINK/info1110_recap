@@ -48,7 +48,7 @@ class LaserCircuit:
         height - the width to set this circuit board to
         '''
         self.width = width
-        self.heght = height
+        self.height = height
         self.emitters = []
         self.receivers = []
         self.photons = []
@@ -291,12 +291,13 @@ class LaserCircuit:
         if isinstance(emitter, Emitter):
                 if emitter.x <= self.width and emitter.y <= self.height:
                     if self.get_collided_emitter(emitter) == None:
-                        # 여기서 만약 emitter 의 좌표에 무언가 존재했는데 그것이 Emitter 클래스가 아니면 어떻게 되는가?
-                        # emitter 의 자리에 Emitter 클래스가 아닌 Photon 이나 Receiver 가 존재해도 리턴값이 None 이 아닐텐데
-                        # while 
-                        pass
-                    #서킷에 존재하는 에미터들을 순회 하면서, 심볼이 겹치는지 확인
-
+                        for entity in self.emitters:
+                            if entity.symbol == emitter.get_symbol:
+                                print("symbol '" + emitter.get_symbol + "' is already taken by emitter '" + entity + "'")
+                                return False
+                        #추가
+                        self.emitters.append(emitter)
+                        self.emitters.sort(key=lambda x: x.symbol)
                     else:
                         print("Error: position (" + emitter.x + ", " + emitter.y + "is already taken by emitter '"+ self.get_collided_emitter(emitter) + "'.")
                         return False
