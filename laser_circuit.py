@@ -287,10 +287,32 @@ class LaserCircuit:
         You will need to find your own way to check for symbol collisions
         with other emitters.
         '''
+
+        if isinstance(emitter, Emitter):
+                if emitter.x <= self.width and emitter.y <= self.height:
+                    if self.get_collided_emitter(emitter) == None:
+                        # 여기서 만약 emitter 의 좌표에 무언가 존재했는데 그것이 Emitter 클래스가 아니면 어떻게 되는가?
+                        # emitter 의 자리에 Emitter 클래스가 아닌 Photon 이나 Receiver 가 존재해도 리턴값이 None 이 아닐텐데
+                        # while 
+                        pass
+                    #서킷에 존재하는 에미터들을 순회 하면서, 심볼이 겹치는지 확인
+
+                    else:
+                        print("Error: position (" + emitter.x + ", " + emitter.y + "is already taken by emitter '"+ self.get_collided_emitter(emitter) + "'.")
+                        return False
+                else:
+                    print("Error: position (" + emitter.x + ", " + emitter.y +") is out-of-bounds of " + self.width + "x" + self.height + " circuit board")
+                    return False
+        else:
+            return False
+
+            
+
  
     
     def get_emitters(self) -> list[Emitter]:
         '''Returns emitters.'''
+        return self.emitters
        
 
     
